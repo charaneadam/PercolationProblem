@@ -1,5 +1,5 @@
-import edu.princeton.cs.algs4.QuickFindUF;
-// The QuickFindUF used methods will be explained in this file, and it will be implemented
+import edu.princeton.cs.algs4.WeightedQuickUnionUF;
+// The WeightedQuickUnionUF used methods will be explained in this file, and it will be implemented
 
 public class Percolation {
 	// OUR IMPLEMENTATION WILL USE 1 FOR THE FIRST ROW AND NOT 0(THAT'S WHY WE'LL BE SUBSTRACTING ONE EACH TIME) 
@@ -15,7 +15,7 @@ public class Percolation {
 	private boolean[][] grid; 
 	// The N*N grid, since all we need is if a site is opened or not, we'll use boolean values (memory ;) )
 	private final boolean OPEN = true;
-	private QuickFindUF quickFind;
+	private WeightedQuickUnionUF quickFind;
 	
 	public Percolation(int n){
 		// create n-by-n grid, with all sites blocked
@@ -23,7 +23,7 @@ public class Percolation {
 			throw new IllegalArgumentException("'n' can not be negative or null");
 		this.N = n;
 		this.BOTTOM = n*n +1; // Since the grid be will have two extra sites (TOP and BOTTOM)
-		quickFind = new QuickFindUF(n*n +2); 
+		quickFind = new WeightedQuickUnionUF(n*n +2); 
 		// The constructor builds the grid in a way to be easy to look for connected sites, connect them if not ...
 		grid = new boolean[n][n]; // This is our real grid
 	}
@@ -70,7 +70,7 @@ public class Percolation {
 	
 	private int getIndex(int i, int j){
 		/*
-		 * Let me tell you a secret, the data structure used in QuickFindUF use an inline array (one dimension)
+		 * Let me tell you a secret, the data structure used in WeightedQuickUnionUF use an inline array (one dimension)
 		 * instead of two dimensions. So this method simply get the index of a site in a one dimension array
 		 * from it's position in the two dimensional array. Do the math and check.
 		 */
